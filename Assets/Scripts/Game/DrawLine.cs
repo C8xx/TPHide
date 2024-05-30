@@ -5,7 +5,7 @@ using UnityEngine;
 public class DrawLine : MonoBehaviour
 {
     Camera cam;
-    MoveController mc;
+    PlayerCamouflage mc;
     Trayertory t;
     bool isDragging;
     Vector2 starPoint;
@@ -18,7 +18,7 @@ public class DrawLine : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-        mc = GetComponent<MoveController>();
+        mc = GetComponent<PlayerCamouflage>();
         t = GetComponent<Trayertory>();
     }
 

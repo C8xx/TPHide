@@ -15,7 +15,18 @@ public class PlayerCamouflage : MonoBehaviour
 
     private bool isCamouflaged = false;
     private Coroutine camouflageCoroutine;
+    public bool canThrow;
+    public Transform SpawnPoint;
+    public float throwForce;
+    public GameObject bomb;
+    private Rigidbody2D rb;
+   private AudioSource sfx;
 
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        sfx = GetComponent<AudioSource>();
+    }
     void Update()
     {
         if (Input.GetKeyDown(camouflageKey))
@@ -66,5 +77,16 @@ public class PlayerCamouflage : MonoBehaviour
     {
         yield return new WaitForSeconds(camouflageDuration);
         StopCamouflage();
+    }
+    public void ThrowBomb(Vector2 force)
+    {
+        GameObject Bomb = Instantiate(bomb, SpawnPoint.position, Quaternion.identity);
+        Bomb.GetComponent<Bomb>().sound = sfx;
+        Bomb.GetComponent<Bomb>().player = this;
+        Bomb.GetComponent<Bomb>().Push(force);
+    }
+    public void ApplyVelocity(Vector2 velocity)
+    {
+        rb.velocity = velocity;
     }
 }
