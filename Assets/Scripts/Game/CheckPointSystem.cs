@@ -17,11 +17,11 @@ public class CheckPointSystem : MonoBehaviour
     {
         if (CheckPointSystem.instance != null)
             Destroy(gameObject);
-        else
+       else
         {
             // Cargar la última posición del jugador desde PlayerPrefs
             float lastPlayerPosX = PlayerPrefs.GetFloat("LastPlayerPosX", 0);
-            float lastPlayerPosY = PlayerPrefs.GetFloat("LastPlayerPosY", 0);
+           float lastPlayerPosY = PlayerPrefs.GetFloat("LastPlayerPosY", 0);
             ultimaPosicionPlayer = new Vector3(lastPlayerPosX, lastPlayerPosY, 0);
         }
             CheckPointSystem.instance = this;

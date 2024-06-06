@@ -14,7 +14,7 @@ public class CheckPoint : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            anim.Play("checkpointPaso");
+            //anim.Play("checkpointPaso");
             CheckPointSystem.instance.ActualizarUltimaPos(transform.position);
         }
     }
