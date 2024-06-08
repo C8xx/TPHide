@@ -47,13 +47,17 @@ public class Bomb : MonoBehaviour
                 sound.PlayOneShot(clip2);
                 Destroy(gameObject);
             }
+
+           // Destroy(gameObject, 3f);
             
-            Destroy(gameObject, 3f);
         }
     }
     private IEnumerator WaitToDestroy()
     {
         yield return new WaitForSeconds(timeToDestroy);
+        destroy.Invoke();
+        Destroy(gameObject);
+        sound.PlayOneShot(clip2);
     }
 
 

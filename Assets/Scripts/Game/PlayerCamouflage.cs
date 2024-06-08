@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI; // Añadir para usar UI
 using System.Collections; // Añadido para IEnumerator
 
 public class PlayerCamouflage : MonoBehaviour
@@ -27,11 +28,15 @@ public class PlayerCamouflage : MonoBehaviour
 
     private Vector2 currentVelocity;
 
+    [Header("UI")]
+    public Image camouflageCooldownImage; // Referencia a la imagen de UI
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sfx = GetComponent<AudioSource>();
         anim = playerObject.GetComponent<Animation>();
+        camouflageCooldownImage.fillAmount = 0; // Inicialmente el valor es cero
     }
 
     void Update()
@@ -83,11 +88,20 @@ public class PlayerCamouflage : MonoBehaviour
         }
         sfx.PlayOneShot(exitCamouflageSound);
         anim.Play("exitcamuflaje");
+        camouflageCooldownImage.fillAmount = 0; // Restablecer el valor de la imagen
     }
 
     private IEnumerator CamouflageTimer()
     {
-        yield return new WaitForSeconds(camouflageDuration);
+        float elapsedTime = 0;
+
+        while (elapsedTime < camouflageDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            camouflageCooldownImage.fillAmount = 1 - (elapsedTime / camouflageDuration); // Invertir el valor de llenado de la imagen
+            yield return null;
+        }
+
         StopCamouflage();
     }
 
